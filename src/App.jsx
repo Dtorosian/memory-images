@@ -113,8 +113,8 @@ export default function App() {
     }
     
     return (
-        <main className='flex flex-col justify-center items-center gap-8 h-full min-h-screen p-1'>
-            {!isGameOn && <h1 className='text-yellow-600 text-3xl tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>}
+        <div className='flex flex-col justify-center items-center gap-8 h-full min-h-screen p-1 w-11/12 mx-auto'>
+            {!isGameOn && <h1 className='text-yellow-600 text-4xl tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>}
             {!isGameOn && !isError &&
                 <Form handleSubmit={startGame} handleChange={handleFormChange} />
             }
@@ -130,6 +130,6 @@ export default function App() {
                 />
             }
             {isError && <ErrorCard handleClick={resetError} />}
-        </main>
+        </div>
     )
 }
