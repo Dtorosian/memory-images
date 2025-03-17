@@ -34,7 +34,7 @@ export default function App() {
     
     async function startGame(e) {
         e.preventDefault()
-        
+
         try {
             const response = await fetch(`https://emojihub.yurace.pro/api/all/category/${formData.category}`)
             
@@ -113,8 +113,8 @@ export default function App() {
     }
     
     return (
-        <div className='flex flex-col justify-center items-center gap-8 h-full min-h-screen p-1 w-11/12 mx-auto'>
-            {!isGameOn && <h1 className='text-yellow-600 text-4xl tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>}
+        <div className='flex flex-col justify-center items-center gap-8 text-xl h-full min-h-screen p-1 w-11/12 mx-auto'>
+            <h1 className='text-yellow-600 text-4xl tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>
             {!isGameOn && !isError &&
                 <Form handleSubmit={startGame} handleChange={handleFormChange} />
             }
