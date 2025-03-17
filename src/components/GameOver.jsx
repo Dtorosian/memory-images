@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import RegularButton from './RegularButton'
 
-export default function GameOver({ handleClick }) {
+export default function GameOver({ onClick }) {
     const divRef = useRef(null)
     
     useEffect(() => {
@@ -15,7 +15,7 @@ export default function GameOver({ handleClick }) {
             ref={divRef}
         >
             <p className="text-lg my-1 mx-3">You've matched all the memory cards!</p>
-            <RegularButton handleClick={handleClick}>
+            <RegularButton onClick={onClick}>
                 Play again
             </RegularButton>
         </div>

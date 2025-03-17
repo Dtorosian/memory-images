@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Form from '/src/components/Form.jsx'
+import StartPage from '/src/components/StartPage.jsx'
 import MemoryCard from './components/MemoryCard'
 import AssistiveTechInfo from './components/AssistiveTechInfo'
 import GameOver from './components/GameOver'
@@ -15,6 +15,8 @@ export default function App() {
     const [matchedCards, setMatchedCards] = useState([])
     const [areAllCardsMatched, setAreAllCardsMatched] = useState(false)
     const [isError, setIsError] = useState(false)
+
+    const primaryColor = 'bg-custom-blue'
 
     useEffect(() => {
         if (selectedCards.length === 2 && selectedCards[0].name === selectedCards[1].name) {
@@ -114,22 +116,27 @@ export default function App() {
     
     return (
         <div className='flex flex-col justify-center items-center gap-8 text-xl h-full min-h-screen p-1 w-11/12 mx-auto'>
-            <h1 className='text-yellow-600 text-4xl tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>
+            <h1 className='text-black text-4xl font-bold tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>
             {!isGameOn && !isError &&
-                <Form handleSubmit={startGame} handleChange={handleFormChange} />
+                <StartPage 
+                    onSubmit={startGame} 
+                    onClick={handleFormChange} 
+                    primaryColor={primaryColor} 
+                />
             }
             {isGameOn && !areAllCardsMatched &&
                 <AssistiveTechInfo emojisData={emojisData} matchedCards={matchedCards} />}
-            {areAllCardsMatched && <GameOver handleClick={resetGame} />}
+            {areAllCardsMatched && <GameOver onClick={resetGame} />}
             {isGameOn &&
                 <MemoryCard
-                    handleClick={turnCard}
+                    onClick={turnCard}
                     data={emojisData}
                     selectedCards={selectedCards}
                     matchedCards={matchedCards}
+                    primaryColor={primaryColor}
                 />
             }
-            {isError && <ErrorCard handleClick={resetError} />}
+            {isError && <ErrorCard onClick={resetError} />}
         </div>
     )
 }
