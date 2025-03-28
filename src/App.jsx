@@ -120,13 +120,13 @@ export default function App() {
             {!isGameOn && !isError &&
                 <StartPage 
                     onSubmit={startGame} 
-                    onClick={handleFormChange} 
+                    onChange={handleFormChange} 
                     primaryColor={primaryColor} 
                 />
             }
             {isGameOn && !areAllCardsMatched &&
                 <AssistiveTechInfo emojisData={emojisData} matchedCards={matchedCards} />}
-            {areAllCardsMatched && <GameOver onClick={resetGame} />}
+            {areAllCardsMatched && <GameOver onClick={resetGame} primaryColor={primaryColor} />}
             {isGameOn &&
                 <MemoryCard
                     onClick={turnCard}

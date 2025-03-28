@@ -33,9 +33,6 @@ export const data = {
         },
         {
             value: "40"
-        },
-        {
-            value: "50"
-        },
+        }
     ]
 }
