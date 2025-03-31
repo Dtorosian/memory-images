@@ -1,6 +1,6 @@
 import EmojiButton from './EmojiButton'
 
-export default function MemoryCard({ onClick, data, selectedCards, matchedCards, primaryColor }) {
+export default function MemoryCard({ onClick, data, selectedCards, matchedCards, primaryColor, secondaryColor }) {
     const cardEl = data.map((emoji, index) => {
         const selectedCardEntry = selectedCards.find(emoji => emoji.index === index)
         const matchedCardEntry = matchedCards.find(emoji => emoji.index === index)
@@ -14,6 +14,7 @@ export default function MemoryCard({ onClick, data, selectedCards, matchedCards,
                     matchedCardEntry={matchedCardEntry}
                     index={index}
                     primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
                 />
             </li>
         )

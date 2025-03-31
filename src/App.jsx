@@ -16,7 +16,11 @@ export default function App() {
     const [areAllCardsMatched, setAreAllCardsMatched] = useState(false)
     const [isError, setIsError] = useState(false)
 
-    const primaryColor = 'bg-custom-blue'
+    const primaryColor = 'bg-sand-beige'
+    const secondaryColor = 'bg-mud-green'
+    const backgroundColor = 'bg-ink-gray'
+    const textColor = 'text-white'
+    const fontType = 'font-arial'
 
     useEffect(() => {
         if (selectedCards.length === 2 && selectedCards[0].name === selectedCards[1].name) {
@@ -115,18 +119,21 @@ export default function App() {
     }
     
     return (
-        <div className='flex flex-col justify-center items-center gap-8 text-xl h-full min-h-screen p-1 w-11/12 mx-auto'>
-            <h1 className='text-black text-4xl font-bold tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>
+        <div className={`${backgroundColor} ${textColor} ${fontType} flex flex-col justify-center items-center gap-8 text-xl h-full min-h-screen p-3 mx-auto`}>
+            <h1 className='text-4xl font-bold tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>
             {!isGameOn && !isError &&
                 <StartPage 
                     onSubmit={startGame} 
                     onChange={handleFormChange} 
-                    primaryColor={primaryColor} 
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    textColor={textColor} 
+                    backgroundColor={backgroundColor}
                 />
             }
             {isGameOn && !areAllCardsMatched &&
                 <AssistiveTechInfo emojisData={emojisData} matchedCards={matchedCards} />}
-            {areAllCardsMatched && <GameOver onClick={resetGame} primaryColor={primaryColor} />}
+            {areAllCardsMatched && <GameOver onClick={resetGame} primaryColor={primaryColor} secondaryColor={secondaryColor} />}
             {isGameOn &&
                 <MemoryCard
                     onClick={turnCard}
@@ -134,6 +141,7 @@ export default function App() {
                     selectedCards={selectedCards}
                     matchedCards={matchedCards}
                     primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
                 />
             }
             {isError && <ErrorCard onClick={resetError} />}
