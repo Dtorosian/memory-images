@@ -4,6 +4,7 @@ import MemoryCard from './components/MemoryCard'
 import AssistiveTechInfo from './components/AssistiveTechInfo'
 import GameOver from './components/GameOver'
 import ErrorCard from './components/ErrorCard'
+import { getData } from './api'
 
 export default function App() {
     const initialFormData = {category: "animals-and-nature", number: 10}
@@ -52,8 +53,13 @@ export default function App() {
     
     async function startGame(e) {
         e.preventDefault()
+        startTimeRef.current = Date.now()
 
-        try {
+        const emojis = await getData(formData)
+        setEmojisData(emojis)
+        setIsGameOn(true)
+
+        /* try {
             const response = await fetch(`https://emojihub.yurace.pro/api/all/category/${formData.category}`)
             
             if (!response.ok) {
@@ -66,14 +72,14 @@ export default function App() {
             
             setEmojisData(emojisArray)
             setIsGameOn(true)
-            startTimeRef.current = Date.now()
+            
         } catch(err) {
             console.error(err)
             setIsError(true)
-        }   
+        }    */
     }
 
-    async function getDataSlice(data) {
+    /* async function getDataSlice(data) {
         const randomIndices = getRandomIndices(data)
         
         const dataSlice = randomIndices.reduce((array, index) => {
@@ -110,7 +116,7 @@ export default function App() {
         }
         
         return pairedEmojisArray
-    }
+    } */
     
     function turnCard(name, index) {
         if (selectedCards.length < 2) {
