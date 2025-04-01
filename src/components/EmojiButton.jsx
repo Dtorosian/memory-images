@@ -21,7 +21,7 @@ export default function EmojiButton({
         selectedCardEntry ? `${decodeEntity(emoji.name)}. Not matched yet.` :
         "Card upside down."
 
-    const hiddenCardScale = matchedCardEntry || selectedCardEntry ? 1 : 1.1
+    const hiddenCardScale = matchedCardEntry || selectedCardEntry ? 1 : 1.05
  
     return (
         <motion.div whileHover={{ scale: hiddenCardScale }}>

@@ -6,7 +6,7 @@ export default function MemoryCard({ onClick, data, selectedCards, matchedCards,
         const matchedCardEntry = matchedCards.find(emoji => emoji.index === index)
 
         return (
-            <li key={index} className={` list-none rounded-lg lg:w-full lg:h-full`}>
+            <li key={index} className='list-none rounded-lg lg:w-full lg:h-full'>
                 <EmojiButton
                     emoji={emoji}
                     onClick={() => onClick(emoji.name, index)}

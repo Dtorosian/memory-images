@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import StartPage from '/src/components/StartPage.jsx'
 import MemoryCard from './components/MemoryCard'
 import AssistiveTechInfo from './components/AssistiveTechInfo'
@@ -15,12 +15,24 @@ export default function App() {
     const [matchedCards, setMatchedCards] = useState([])
     const [areAllCardsMatched, setAreAllCardsMatched] = useState(false)
     const [isError, setIsError] = useState(false)
+    
+    const startTimeRef = useRef(null)
+
 
     const primaryColor = 'bg-sand-beige'
     const secondaryColor = 'bg-mud-green'
     const backgroundColor = 'bg-ink-gray'
     const textColor = 'text-white'
     const fontType = 'font-arial'
+
+
+    useEffect(() => {
+        if (startTimeRef.current && areAllCardsMatched) {
+            const endTime = Date.now()
+            const timeTaken = (endTime - startTimeRef.current) / 1000
+            console.log(timeTaken)
+        }
+    }, [areAllCardsMatched])
 
     useEffect(() => {
         if (selectedCards.length === 2 && selectedCards[0].name === selectedCards[1].name) {
@@ -54,6 +66,7 @@ export default function App() {
             
             setEmojisData(emojisArray)
             setIsGameOn(true)
+            startTimeRef.current = Date.now()
         } catch(err) {
             console.error(err)
             setIsError(true)
@@ -111,7 +124,7 @@ export default function App() {
         setIsGameOn(false)
         setSelectedCards([])
         setMatchedCards([])
-        setAreAllCardsMatched(false)
+        setAreAllCardsMatched(false)        
     }
     
     function resetError() {
