@@ -1,57 +1,60 @@
-export async function getData(formData) {
-    try {
-        const response = await fetch(`https://emojihub.yurace.pro/api/all/category/${formData.category}`)
-        
-        if (!response.ok) {
-            throw new Error("Could not fetch data from API")
-        }
-        
-        const data = await response.json()
-        const dataSlice = await getDataSlice(data, formData)
-        const emojisArray = await getEmojisArray(dataSlice)
-        
-        return emojisArray
-        
-    } catch(err) {
-        console.error(err)
-    }   
-}
-
-async function getDataSlice(data, formData) {
-    const randomIndices = getRandomIndices(data, formData)
+    export async function getData(formData) {
+        try {
+            const data = await fetchImages(formData.number / 2)
     
-    const dataSlice = randomIndices.reduce((array, index) => {
-        array.push(data[index])
-        return array
-    }, [])
-
-    return dataSlice
-}
-
-function getRandomIndices(data, formData) {        
-    const randomIndicesArray = []
-
-    for (let i = 0; i < (formData.number / 2); i++) {
-        const randomNum = Math.floor(Math.random() * data.length)
-        if (!randomIndicesArray.includes(randomNum)) {
-            randomIndicesArray.push(randomNum)
-        } else {
-            i--
-        }
+            if (!data || data.length === 0) {
+                throw new Error("No images available");
+            }
+    
+            // Process the images (random selection, duplication, shuffle)
+            const dataSlice = await getDataSlice(data, formData)
+            const imageArray = await getImageArray(dataSlice)
+    
+            return imageArray;
+            
+        } catch (err) {
+            console.error(err);
+        }   
     }
     
-    return randomIndicesArray
-}
-
-async function getEmojisArray(data) {
-    const pairedEmojisArray = [...data, ...data]
+    async function fetchImages(count) {
+        const imagePromises = Array.from({ length: count }, (_, i) =>
+            fetch(`https://picsum.photos/200/300?random=${i}`)
+            .then(res => res.url)
+        )
     
-    for (let i = pairedEmojisArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        const temp = pairedEmojisArray[i]
-        pairedEmojisArray[i] = pairedEmojisArray[j]
-        pairedEmojisArray[j] = temp
+        return await Promise.all(imagePromises);
     }
     
-    return pairedEmojisArray
-}
+    // Select random images (already random from Picsum, but keeping structure)
+    async function getDataSlice(data, formData) {
+        const randomIndices = getRandomIndices(data, formData)
+        return randomIndices.map(index => data[index])
+    }
+    
+    // Generate unique random indices
+    function getRandomIndices(data, formData) {        
+        const randomIndicesArray = []
+    
+        while (randomIndicesArray.length < formData.number / 2) {
+            const randomNum = Math.floor(Math.random() * data.length)
+            if (!randomIndicesArray.includes(randomNum)) {
+                randomIndicesArray.push(randomNum)
+            }
+        }
+        
+        return randomIndicesArray
+    }
+    
+    // Duplicate and shuffle images
+    async function getImageArray(data) {
+        const pairedImagesArray = [...data, ...data]
+    
+        for (let i = pairedImagesArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [pairedImagesArray[i], pairedImagesArray[j]] = [pairedImagesArray[j], pairedImagesArray[i]]
+        }
+        
+        return pairedImagesArray
+    }
+    

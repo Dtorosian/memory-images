@@ -23,16 +23,16 @@ export const data = {
     ],
     number: [
         {
-            value: "10"
+            value: "6"
         },
         {
-            value: "20"
+            value: "12"
         },
         {
-            value: "30"
+            value: "18"
         },
         {
-            value: "40"
+            value: "24"
         }
     ]
 }

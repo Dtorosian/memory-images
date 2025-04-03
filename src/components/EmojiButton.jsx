@@ -1,8 +1,7 @@
-import { decodeEntity } from 'html-entities'
 import { motion } from "motion/react"
 
 export default function EmojiButton({
-    emoji,
+    image,
     onClick,
     selectedCardEntry,
     matchedCardEntry,
@@ -12,27 +11,27 @@ export default function EmojiButton({
 }) {    
     
     const btnStyle =
-        matchedCardEntry ? "bg-gray-100 text-opacity-100 border-black" :
-        selectedCardEntry ? `${secondaryColor} bg-opacity-90 text-opacity-100 border-sky-200` :
-        `${primaryColor} hover:border-sky-200 cursor-pointer`
+        matchedCardEntry ? "bg-white border border-black opacity-60" :
+        selectedCardEntry ? `${secondaryColor} border-2 border-white` :
+        `${primaryColor} cursor-pointer`
+
+    const imgStyle = !selectedCardEntry && !matchedCardEntry ? 'opacity-0' : null
         
-    const btnAria =
-        matchedCardEntry ? `${decodeEntity(emoji.name)}. Matched.` :
-        selectedCardEntry ? `${decodeEntity(emoji.name)}. Not matched yet.` :
-        "Card upside down."
 
     const hiddenCardScale = matchedCardEntry || selectedCardEntry ? 1 : 1.05
  
     return (
         <motion.div whileHover={{ scale: hiddenCardScale }}>
             <button
-                className={` text-black text-4xl font-semibold text-opacity-0 border-2 rounded-md px-1 py-5 w-full h-full transition duration-150 ease-in-out  md:text-6xl lg:px-2 lg:py-8 ${btnStyle} shadow-md shadow-gray-400`}
+                className={`text-4xl font-semibold rounded-md p-1 h-full w-full transition duration-150 ease-in-out lg:p-3 ${btnStyle} shadow-sm shadow-gray-500 flex items-center justify-center hover:shadow-md`}
                 onClick={selectedCardEntry ? null : onClick}
                 disabled={matchedCardEntry}
-                aria-label={`Position ${index + 1}: ${btnAria}`}
-                aria-live="polite"
-                >
-                {decodeEntity(emoji.htmlCode[0])}
+            >
+                <img 
+                    src={image} 
+                    alt={`Image ${index + 1}`} 
+                    className={`${imgStyle} w-full h-full object-cover rounded-md transition duration-500 ease-in-out`} 
+                />
             </button>
         </motion.div>
     )

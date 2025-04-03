@@ -1,7 +1,7 @@
 export default function RegularButton({ children, onClick, primaryColor }) {
     return (
         <button
-            className={`${primaryColor} text-white font-semibold rounded-md cursor-pointer border mx-auto py-2 px-5 transition duration-150 ease-in-out hover:bg-opacity-70 hover:text-black`}
+            className={`${primaryColor} font-semibold rounded-md cursor-pointer mx-auto py-3 px-8 transition duration-150 ease-in-out shadow-sm hover:shadow-md hover:bg-opacity-70 hover:text-black md:w-1/3 md:text-lg`}
             onClick={onClick}
         >
             {children}
