@@ -26,13 +26,19 @@ export const data = {
             value: "6"
         },
         {
+            value: "8"
+        },
+        {
+            value: "10"
+        },
+        {
             value: "12"
         },
         {
-            value: "18"
+            value: "16"
         },
         {
-            value: "24"
+            value: "20"
         }
     ]
 }

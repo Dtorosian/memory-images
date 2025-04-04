@@ -18,13 +18,11 @@ export default function App() {
     
     const startTimeRef = useRef(null)
 
-
     const primaryColor = 'bg-sand-beige'
     const secondaryColor = 'bg-mud-green'
     const backgroundColor = 'bg-ink-gray'
     const textColor = 'text-white'
     const fontType = 'font-arial'
-
 
     useEffect(() => {
         if (startTimeRef.current && areAllCardsMatched) {
@@ -81,7 +79,7 @@ export default function App() {
     }
     
     return (
-        <div className={`${backgroundColor} ${textColor} ${fontType} flex flex-col justify-center items-center gap-8 text-xl h-full min-h-screen p-3 mx-auto`}>
+        <div className={`${backgroundColor} ${textColor} ${fontType} flex flex-col justify-center items-center gap-8 text-xl h-full min-h-screen p-4 mx-auto`}>
             <h1 className='text-4xl font-bold tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>
             {!isGameOn && !isError &&
                 <StartPage 
@@ -102,6 +100,7 @@ export default function App() {
                     matchedCards={matchedCards}
                     primaryColor={primaryColor}
                     secondaryColor={secondaryColor}
+                    cardsNumber={formData.number}
                 />
             }
             {isError && <ErrorCard onClick={resetError} />}
