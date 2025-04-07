@@ -30,8 +30,10 @@ export default {
         'english-violet': '#574B60',
         //
         'ink-gray': '#525e75',
-        'mud-green': '#6b867d',
+        'mud-green': '#78938a',
         'sand-beige': '#dcac5b',
+        //
+        'gray-blue': '#24354C'
 
       },
       opacity: {

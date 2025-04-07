@@ -19,7 +19,7 @@
     
     async function fetchImages(count) {
         const imagePromises = Array.from({ length: count }, (_, i) =>
-            fetch(`https://picsum.photos/200/300?random=${i}`)
+            fetch(`https://picsum.photos/150/200?random=${i}`)
             .then(res => res.url)
         )
     

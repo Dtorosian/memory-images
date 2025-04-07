@@ -4,6 +4,7 @@ import MemoryCard from './components/MemoryCard'
 import GameOver from './components/GameOver'
 import ErrorCard from './components/ErrorCard'
 import { getData } from './api'
+import { useSound } from 'use-sound'
 
 export default function App() {
     const initialFormData = {category: "animals-and-nature", number: 6}
@@ -15,12 +16,15 @@ export default function App() {
     const [matchedCards, setMatchedCards] = useState([])
     const [areAllCardsMatched, setAreAllCardsMatched] = useState(false)
     const [isError, setIsError] = useState(false)
+    const [playGameStart] = useSound('/src/sounds/gameStart.mp3')
+    const [playGameWon] = useSound('/src/sounds/gameWon.wav')
+    const [playCorrect] = useSound('/src/sounds/correct.mp3')
     
     const startTimeRef = useRef(null)
 
     const primaryColor = 'bg-sand-beige'
     const secondaryColor = 'bg-mud-green'
-    const backgroundColor = 'bg-ink-gray'
+    const backgroundColor = 'bg-gray-blue'
     const textColor = 'text-white'
     const fontType = 'font-arial'
 
@@ -28,6 +32,7 @@ export default function App() {
         if (startTimeRef.current && areAllCardsMatched) {
             const endTime = Date.now()
             const timeTaken = (endTime - startTimeRef.current) / 1000
+            playGameWon()
             console.log(timeTaken)
         }
     }, [areAllCardsMatched])
@@ -41,6 +46,7 @@ export default function App() {
     useEffect(() => {
         if (imagesData.length && matchedCards.length === imagesData.length) {
             setAreAllCardsMatched(true)
+            playCorrect()
         }
     }, [matchedCards])
     
@@ -56,6 +62,8 @@ export default function App() {
         setImagesData(images)
         
         setIsGameOn(true)
+
+        playGameStart()
 
     }
     
@@ -79,7 +87,7 @@ export default function App() {
     }
     
     return (
-        <div className={`${backgroundColor} ${textColor} ${fontType} flex flex-col justify-center items-center gap-8 text-xl h-full min-h-screen p-4 mx-auto`}>
+        <div className={`${backgroundColor} ${textColor} ${fontType} flex flex-col justify-center items-center gap-8 text-xl min-h-screen p-4 mx-auto`}>
             <h1 className='text-4xl font-bold tracking-wide uppercase m-0 md:text-5xl'>Memory Game</h1>
             {!isGameOn && !isError &&
                 <StartPage 

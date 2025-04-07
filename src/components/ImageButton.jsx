@@ -7,8 +7,7 @@ export default function EmojiButton({
     matchedCardEntry,
     index,
     primaryColor,
-    secondaryColor,
-    cardsNumber
+    secondaryColor
 }) {    
     
     const btnStyle =
@@ -20,13 +19,11 @@ export default function EmojiButton({
         
 
     const hiddenCardScale = matchedCardEntry || selectedCardEntry ? 1 : 1.03
-
-    const lgScreenWidth = cardsNumber > 12 ? 'md:w-3/4 lg:w-2/3' : 'lg:w-9/12'
  
     return (
-        <motion.section className={`${lgScreenWidth}`} whileHover={{ scale: hiddenCardScale }}>
+        <motion.section whileHover={{ scale: hiddenCardScale }}>
             <button
-                className={`text-4xl font-semibold rounded-md mx-auto p-1 w-full transition duration-150 ease-in-out ${btnStyle} shadow-sm shadow-gray-500 flex items-center justify-center hover:shadow-md`}
+                className={`font-semibold rounded-md p-1 transition duration-150 ease-in-out ${btnStyle} shadow-sm shadow-gray-500 flex items-center justify-center hover:shadow-md `}
                 onClick={selectedCardEntry ? null : onClick}
                 disabled={matchedCardEntry}
             >
