@@ -39,14 +39,15 @@ export default function App() {
 
     useEffect(() => {
         if (selectedCards.length === 2 && selectedCards[0].name === selectedCards[1].name) {
+            playCorrect()
             setMatchedCards(prevMatchedCards => [...prevMatchedCards, ...selectedCards])
+            setSelectedCards([])
         }
     }, [selectedCards])
     
     useEffect(() => {
         if (imagesData.length && matchedCards.length === imagesData.length) {
             setAreAllCardsMatched(true)
-            playCorrect()
         }
     }, [matchedCards])
     
