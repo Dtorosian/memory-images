@@ -22,8 +22,8 @@ export default function App() {
     
     const startTimeRef = useRef(null)
 
-    const primaryColor = 'bg-sand-beige'
-    const secondaryColor = 'bg-mud-green'
+    const primaryColor = 'bg-yellow-600'
+    const secondaryColor = 'bg-gray-600'
     const backgroundColor = 'bg-gray-blue'
     const textColor = 'text-white'
     const fontType = 'font-arial'

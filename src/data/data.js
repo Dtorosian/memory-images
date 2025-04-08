@@ -1,5 +1,5 @@
 export const data = {
-    category: [
+    /* category: [
         {
             name: "Animals and nature",
             value: "animals-and-nature"
@@ -20,7 +20,7 @@ export const data = {
             name: "Symbols",
             value: "symbols"
         }
-    ],
+    ], */
     number: [
         {
             value: "6"
