@@ -5,6 +5,9 @@ import GameOver from './components/GameOver'
 import ErrorCard from './components/ErrorCard'
 import { getData } from './api'
 import { useSound } from 'use-sound'
+import gameStart from '/src/sounds/gameStart.mp3'
+import gameWon from '/src/sounds/gameWon.wav'
+import correct from '/src/sounds/correct.mp3'
 
 export default function App() {
     const initialFormData = {category: "animals-and-nature", number: 6}
@@ -16,9 +19,9 @@ export default function App() {
     const [matchedCards, setMatchedCards] = useState([])
     const [areAllCardsMatched, setAreAllCardsMatched] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [playGameStart] = useSound('/src/sounds/gameStart.mp3')
-    const [playGameWon] = useSound('/src/sounds/gameWon.wav')
-    const [playCorrect] = useSound('/src/sounds/correct.mp3')
+    const [playGameStart] = useSound(gameStart)
+    const [playGameWon] = useSound(gameWon)
+    const [playCorrect] = useSound(correct)
     
     const startTimeRef = useRef(null)
 
